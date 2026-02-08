@@ -1,65 +1,94 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { Rocket, BookOpen } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8 font-sans selection:bg-indigo-500/30">
+
+      {/* Hero Section */}
+      <div className="max-w-4xl text-center space-y-8 mb-16">
+        <h1 className="text-6xl md:text-8xl font-bold tracking-tighter bg-gradient-to-br from-indigo-400 via-cyan-400 to-white bg-clip-text text-transparent animate-pulse">
+          PARABOLA WORLD
+        </h1>
+        <p className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          Master the curves of the universe. Choose your path.
+        </p>
+      </div>
+
+      {/* Mode Selection Cards */}
+      <div className="grid md:grid-cols-2 gap-8 max-w-5xl w-full">
+
+        {/* Story Mode Card - Tech Flat Style */}
+        <Link
+          href="/story-mode"
+          className="group relative overflow-hidden bg-indigo-950/20 border border-indigo-500/50 hover:border-indigo-400 transition-all duration-300 hover:scale-[1.01]"
+        >
+          {/* Tech Corners */}
+          <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-indigo-400 opacity-50 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-indigo-400 opacity-50 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-indigo-400 opacity-50 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-indigo-400 opacity-50 group-hover:opacity-100 transition-opacity" />
+
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+          <div className="p-10 relative z-10 flex flex-col h-full font-mono">
+            <div className="w-16 h-16 bg-indigo-500/10 flex items-center justify-center mb-6 border border-indigo-400/30 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+              <Rocket className="w-8 h-8 text-indigo-300 group-hover:text-white" />
+            </div>
+            <h2 className="text-3xl font-bold text-white mb-2 group-hover:text-indigo-200 transition-colors uppercase tracking-wider">
+              Story Mode
+            </h2>
+            <div className="text-xs text-indigo-400 mb-6 uppercase tracking-[0.2em] border-l-2 border-indigo-500 pl-2">
+              Interstellar Chronicles
+            </div>
+            <p className="text-slate-400 leading-relaxed mb-8 flex-1 text-sm">
+              JOIN CAPTAIN LIN AND AI DEER. NAVIGATE THE GREAT LINEARIZATION.
+              EXECUTE QUADRATIC MANEUVERS TO RESTORE CURVATURE.
+            </p>
+            <div className="flex items-center text-indigo-300 font-bold group-hover:translate-x-2 transition-transform text-sm tracking-widest uppercase">
+              [ INITIALIZE MISSION ] <span className="ml-2">→</span>
+            </div>
+          </div>
+        </Link>
+
+        {/* Classic Mode Card - Tech Flat Style */}
+        <Link
+          href="/parabola-world"
+          className="group relative overflow-hidden bg-slate-900/20 border border-slate-700/50 hover:border-slate-500 transition-all duration-300 hover:scale-[1.01]"
+        >
+          {/* Tech Corners */}
+          <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-slate-500 opacity-30 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-slate-500 opacity-30 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-slate-500 opacity-30 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-slate-500 opacity-30 group-hover:opacity-100 transition-opacity" />
+
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+          <div className="p-10 relative z-10 flex flex-col h-full font-mono">
+            <div className="w-16 h-16 bg-slate-700/10 flex items-center justify-center mb-6 border border-slate-600/30 group-hover:bg-slate-700 group-hover:text-white transition-colors">
+              <BookOpen className="w-8 h-8 text-slate-300 group-hover:text-white" />
+            </div>
+            <h2 className="text-3xl font-bold text-slate-200 mb-2 group-hover:text-white transition-colors uppercase tracking-wider">
+              Classic Mode
+            </h2>
+            <div className="text-xs text-slate-500 mb-6 uppercase tracking-[0.2em] border-l-2 border-slate-600 pl-2">
+              Standard Training
+            </div>
+            <p className="text-slate-400 leading-relaxed mb-8 flex-1 text-sm">
+              PURE MATHEMATICAL TRAINING. FOCUS ON PARABOLA MECHANICS.
+              NO NARRATIVE INTERFERENCE. OPTIMIZED FOR PRACTICE.
+            </p>
+            <div className="flex items-center text-slate-400 font-bold group-hover:translate-x-2 transition-transform text-sm tracking-widest uppercase">
+              [ ENTER SANDBOX ] <span className="ml-2">→</span>
+            </div>
+          </div>
+        </Link>
+
+      </div>
+
+      <footer className="mt-20 text-slate-600 text-sm font-mono">
+        v6.0.0 // SYSTEM_READY
+      </footer>
     </div>
   );
 }
