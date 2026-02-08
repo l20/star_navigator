@@ -21,8 +21,7 @@ export default function QuestOverlay() {
     }
   };
 
-  // Hide quest log if dialogue is open to avoid clutter
-  if (isOpen) return null;
+  // Determine Quest Text based on Level
 
   return (
     <div className="absolute top-8 left-8 z-30 pointer-events-none">

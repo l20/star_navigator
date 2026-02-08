@@ -12,6 +12,8 @@ export default function MindPalaceOverlay() {
   const [step, setStep] = useState<'CONCEPT' | 'QUIZ' | 'SUCCESS'>('CONCEPT');
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isWrong, setIsWrong] = useState(false);
+  const [wrongAttempts, setWrongAttempts] = useState(0); // New: Track attempts
+  const [isHesitating, setIsHesitating] = useState(false); // New: Track hesitation
   const [feedback, setFeedback] = useState<React.ReactNode | null>(null);
 
   // Reset state when opening
@@ -20,10 +22,24 @@ export default function MindPalaceOverlay() {
       setStep('CONCEPT');
       setSelectedOption(null);
       setIsWrong(false);
+      setWrongAttempts(0);
+      setIsHesitating(false);
       setFeedback(null);
       // Play entry sound?
     }
   }, [isMindPalaceOpen, level]);
+
+  // Hesitation Detection Timer
+  useEffect(() => {
+    if (step === 'QUIZ' && !selectedOption) {
+      const timer = setTimeout(() => {
+        setIsHesitating(true);
+      }, 15000); // 15s hesitation
+      return () => clearTimeout(timer);
+    }
+    // Clear hesitation if user selects something
+    setIsHesitating(false);
+  }, [step, selectedOption]);
 
   if (!isMindPalaceOpen) return null;
 
@@ -46,6 +62,7 @@ export default function MindPalaceOverlay() {
     } else {
       // Wrong
       setIsWrong(true);
+      setWrongAttempts(prev => prev + 1);
       synth.playError();
       // Show specific feedback if available
       if (content.quiz.wrongFeedback && content.quiz.wrongFeedback[index]) {
@@ -106,7 +123,7 @@ export default function MindPalaceOverlay() {
 
           {/* Avatar Hint Bubble */}
           <AnimatePresence>
-            {(step === 'QUIZ' && isWrong && content.quiz?.hint) && (
+            {(step === 'QUIZ' && (isWrong || isHesitating) && content.quiz?.hint) && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -115,9 +132,17 @@ export default function MindPalaceOverlay() {
               >
                 <div className="flex gap-2 mb-2 text-cyan-500 font-bold tracking-widest uppercase items-center">
                   <Sparkles className="w-3 h-3" />
-                  <span>辅助建议 (ADVICE):</span>
+                  <span>
+                    {isHesitating ? '检测到思维停滞 (ANALYSIS)' : '辅助建议 (ADVICE)'}:
+                  </span>
                 </div>
-                {content.quiz.hint}
+                {/* Show Deep Hint if struggling (2+ wrong attempts) or hesitating for a long time? */}
+                {/* Actually, show Hint first. If wrongAttempts >= 2, show Deep Hint if exists */}
+                {
+                  (wrongAttempts >= 2 && content.quiz.deepHint)
+                    ? content.quiz.deepHint
+                    : content.quiz.hint
+                }
               </motion.div>
             )}
           </AnimatePresence>

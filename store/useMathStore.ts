@@ -22,6 +22,7 @@ interface MathState {
   a: number;
   h: number;
   k: number;
+  userName: string; // New: Player Name
 
   // Game Logic
   isPlaying: boolean;
@@ -33,14 +34,24 @@ interface MathState {
   isLevelComplete: boolean;
   isDataLogOpen: boolean; // New UI State
   attempts: number; // Track user interactions
+  isSystemBootComplete: boolean; // New State
 
   isMindPalaceOpen: boolean; // New: For Story Mode
   storyMode: boolean; // New: To distinguish between Classic and Story
+
+  // ITS State
+  cognitiveState: {
+    lastInteractionTime: number;
+    hesitationTime: number; // ms since last action
+    errorHistory: Record<string, number>; // e.g. "SIGN_ERROR": 3
+    isStruggling: boolean;
+  };
 
   // Actions
   setA: (val: number) => void;
   setH: (val: number) => void;
   setK: (val: number) => void;
+  setUserName: (name: string) => void;
   setIsPlaying: (val: boolean) => void;
   openDataLog: () => void; // New Action
   closeDataLog: () => void; // New Action
@@ -49,6 +60,10 @@ interface MathState {
   resetLevel: () => void;
   completeLevel: () => void;
   incrementAttempts: () => void;
+
+  completeSystemBoot: () => void; // New Action
+  recordInteraction: (type: string, value?: any) => void; // New ITS Action
+  resetCognitiveState: () => void; // New ITS Action
   nextLevel: () => void; // New Action
   // System
   resetProgress: () => void; // New: Clear save
@@ -67,6 +82,7 @@ export const useMathStore = create<MathState>()(
     (set, get) => ({
       // Initial defaults (will be overwritten by persist if storage exists)
       ...LEVEL_CONFIGS[0],
+      userName: 'Commander', // Default
 
       isPlaying: false,
       level: 0,
@@ -79,9 +95,19 @@ export const useMathStore = create<MathState>()(
       isMindPalaceOpen: false,
       storyMode: false,
 
+      isSystemBootComplete: false, // Initial state
+
+      cognitiveState: {
+        lastInteractionTime: Date.now(),
+        hesitationTime: 0,
+        errorHistory: {},
+        isStruggling: false,
+      },
+
       setA: (val) => set({ a: val }),
       setH: (val) => set({ h: val }),
       setK: (val) => set({ k: val }),
+      setUserName: (name) => set({ userName: name }),
       setIsPlaying: (val) => set({ isPlaying: val }),
 
       openDataLog: () => set({ isDataLogOpen: true }),
@@ -102,6 +128,39 @@ export const useMathStore = create<MathState>()(
 
       completeLevel: () => set({ isLevelComplete: true }),
       incrementAttempts: () => set((state) => ({ attempts: state.attempts + 1 })),
+
+      completeSystemBoot: () => set({ isSystemBootComplete: true }), // New Action
+
+      recordInteraction: (type: string, value?: any) => set((state) => {
+        const now = Date.now();
+        const timeDiff = now - state.cognitiveState.lastInteractionTime;
+
+        // Update error history if type is an error
+        const newErrorHistory = { ...state.cognitiveState.errorHistory };
+        if (type.includes('ERROR')) {
+          newErrorHistory[type] = (newErrorHistory[type] || 0) + 1;
+        }
+
+        return {
+          cognitiveState: {
+            ...state.cognitiveState,
+            lastInteractionTime: now,
+            hesitationTime: 0, // Reset hesitation on action
+            errorHistory: newErrorHistory,
+            // Simple struggling check: > 3 errors of same type
+            isStruggling: Object.values(newErrorHistory).some(count => count >= 3)
+          }
+        };
+      }),
+
+      resetCognitiveState: () => set({
+        cognitiveState: {
+          lastInteractionTime: Date.now(),
+          hesitationTime: 0,
+          errorHistory: {},
+          isStruggling: false
+        }
+      }),
 
       nextLevel: () => {
         const currentLevel = get().level;
@@ -164,7 +223,9 @@ export const useMathStore = create<MathState>()(
       partialize: (state) => ({
         level: state.level,
         maxLevel: state.maxLevel,
-        isMusicMuted: state.isMusicMuted // Persist music preference
+        isMusicMuted: state.isMusicMuted,
+        isSystemBootComplete: state.isSystemBootComplete, // Persist Boot State
+        userName: state.userName // Persist User Name
       }),
     }
   )

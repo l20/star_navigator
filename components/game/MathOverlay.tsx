@@ -27,7 +27,7 @@ function generateParabolaPath(a: number, h: number, k: number, width: number, he
 import { useMemo } from 'react';
 
 export default function MathOverlay() {
-  const { a, h, k, setA, setH, setK, targetA, attempts, incrementAttempts, isLevelComplete, lockedParams, targetH, targetK } = useMathStore();
+  const { a, h, k, setA, setH, setK, targetA, attempts, incrementAttempts, isLevelComplete, lockedParams, targetH, targetK, recordInteraction } = useMathStore();
   const { startDialogue, isOpen } = useDialogueStore();
 
   // Derive paths directly (no useState/useEffect needed)
@@ -191,6 +191,7 @@ export default function MathOverlay() {
                   onChange={(e) => {
                     setA(parseFloat(e.target.value));
                     synth.playClick();
+                    recordInteraction('CHANGE_A', parseFloat(e.target.value));
                   }}
                   onPointerUp={incrementAttempts}
                   className="w-full h-6 bg-transparent appearance-none cursor-pointer accent-yellow-400 hover:accent-yellow-300 transition-colors touch-none absolute z-10"
@@ -214,6 +215,7 @@ export default function MathOverlay() {
                   value={h}
                   onChange={(e) => {
                     setH(parseFloat(e.target.value));
+                    recordInteraction('CHANGE_H', parseFloat(e.target.value));
                   }}
                   className="w-full h-6 bg-transparent appearance-none cursor-pointer accent-blue-400 hover:accent-blue-300 transition-colors touch-none absolute z-10"
                 />
@@ -236,6 +238,7 @@ export default function MathOverlay() {
                   value={k}
                   onChange={(e) => {
                     setK(parseFloat(e.target.value));
+                    recordInteraction('CHANGE_K', parseFloat(e.target.value));
                   }}
                   className="w-full h-6 bg-transparent appearance-none cursor-pointer accent-green-400 hover:accent-green-300 transition-colors touch-none absolute z-10"
                 />

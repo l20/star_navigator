@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Parabola World",
-  description: "A quadratic adventure.",
+  title: "抛物线计划 (Project Parabola)",
+  description: "Math-based Sci-Fi Adventure. Tune the constants to warp space.",
   viewport: {
     width: "device-width",
     initialScale: 1,

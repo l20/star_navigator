@@ -7,6 +7,7 @@ export interface QuizQuestion {
   correctIndex: number;
   explanation?: ReactNode; // Shown after correct answer
   hint?: ReactNode; // Shown after hesitation
+  deepHint?: ReactNode; // Shown after multiple wrong attempts or long hesitation
   wrongFeedback?: Record<number, ReactNode>; // Specific feedback for wrong answers
 }
 
@@ -153,6 +154,7 @@ export const KNOWLEDGE_DB: Record<number, KnowledgeEntry> = {
       correctIndex: 1,
       explanation: "顶点 (5, 3) 对应 (x-5) 和 +3。极窄轨道对应 a=10。",
       hint: "首先定顶点 (h, k)，然后确认开口大小 a。",
+      deepHint: "顶点 (5, 3) 意味着括号里是 (x-5) 且外面是 +3。极窄轨道要求 a 的绝对值很大 (a=10)。",
       wrongFeedback: {
         2: "a=0.5 轨道太宽了！我们需要极其陡峭的曲线来穿过针孔。",
       }

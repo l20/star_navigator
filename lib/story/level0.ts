@@ -3,35 +3,30 @@ import { DialogueNode } from '@/store/useDialogueStore';
 export const STORY_LEVEL_0_SCRIPT: DialogueNode[] = [
   {
     id: 's0_start',
-    text: "警告。引力波探测器过载。前方区域空间曲率无限大。",
-    speaker: 'system',
+    text: "喂！那个新来的调试员，听得到吗？系统全红了，快帮我看一眼仪表盘！",
+    speaker: 'captain',
+    emotion: 'scared',
+    next: 's0_deer_intro'
+  },
+  {
+    id: 's0_deer_intro',
+    text: "检测到驾驶员情绪不稳定。已接管辅助系统。调试员，请看大屏幕，我们需要手动修正星轨参数。",
+    speaker: 'deer',
+    emotion: 'neutral',
     next: 's0_captain_1'
   },
   {
     id: 's0_captain_1',
-    text: "该死！推进器即使开到最大，读数还在往下掉！我们在坠落！",
+    text: "推进器即使开到最大，读数还在往下掉！我们在坠落！小鹿，计算线性逃逸路径！",
     speaker: 'captain',
     emotion: 'scared',
     next: 's0_deer_1'
   },
   {
     id: 's0_deer_1',
-    text: "大叔，这是视界边缘。线性引擎（y = kx + b）无法产生足够的离心力。逃逸概率：0%。",
-    speaker: 'deer', // Blue Hologram
-    emotion: 'neutral',
-    next: 's0_captain_2'
-  },
-  {
-    id: 's0_captain_2',
-    text: "别跟我说什么概率！还有没有别的路？",
-    speaker: 'captain',
-    emotion: 'angry',
-    next: 's0_deer_2'
-  },
-  {
-    id: 's0_deer_2',
-    text: "有。必须升维。指挥官，我需要您的权限接入思维殿堂。我们需要构建“二次动力学模型”。",
+    text: "线性路径（y = kx + b）逃逸率 0%。必须升维。指挥官，进入思维殿堂，我们需要构建“二次动力学模型”。",
     speaker: 'deer',
+    emotion: 'neutral',
     next: 's0_nav_1'
   },
   {

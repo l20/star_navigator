@@ -1,6 +1,7 @@
 'use client';
 
 import { useDialogueStore, Speaker } from '@/store/useDialogueStore';
+import { useMathStore } from '@/store/useMathStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu } from 'lucide-react';
 import Image from 'next/image';
@@ -39,14 +40,14 @@ const TypingEffect = ({ text, speaker }: { text: string; speaker: Speaker }) => 
   return <span>{displayedText}</span>;
 };
 
-const getDisplayName = (speaker: Speaker) => {
+const getDisplayName = (speaker: Speaker, playerName?: string) => {
   switch (speaker) {
     case 'merchant': return '老商人';
     case 'captain': return '老林 (Captain Lin)';
     case 'photon': return '光子 (Photon)';
     case 'deer': return '小鹿 (Deer)';
-    case 'player': return '调律师 (Tuner)';
-    case 'navigator': return '领航员 (Navigator)';
+    case 'player': return `${playerName || '调律师'} (Tuner)`;
+    case 'navigator': return `${playerName || '领航员'} (Navigator)`;
     default: return '系统';
   }
 };
@@ -129,7 +130,7 @@ export default function DialogueOverlay() {
           <div className="flex-1">
             <div className="flex items-center justify-between mb-2 border-b border-white/10 pb-1">
               <div className="text-xs font-bold uppercase tracking-[0.15em] opacity-80 text-white/70">
-                {getDisplayName(currentNode.speaker)}
+                {getDisplayName(currentNode.speaker, useMathStore.getState().userName)}
               </div>
               <div className="text-[10px] text-white/30 tracking-widest">
                 // 传输中
@@ -137,7 +138,10 @@ export default function DialogueOverlay() {
             </div>
 
             <div className="text-lg md:text-xl font-medium leading-relaxed text-white/90 min-h-[3.5rem] font-sans">
-              <TypingEffect text={currentNode.text} speaker={currentNode.speaker} />
+              <TypingEffect
+                text={currentNode.text.replace(/{player}/g, useMathStore.getState().userName || '指挥官')}
+                speaker={currentNode.speaker}
+              />
             </div>
 
             <div className="mt-4 flex justify-end">
