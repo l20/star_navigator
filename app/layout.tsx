@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     maximumScale: 1,
     userScalable: false, // Prevent zoom on mobile/pad
   },
+  icons: {
+    icon: '/icon.ico',
+    shortcut: '/icon.ico',
+    apple: '/icon.ico',
+  },
 };
 
 export default function RootLayout({
