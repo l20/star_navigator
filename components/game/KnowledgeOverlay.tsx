@@ -4,9 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, BookOpen, CheckCircle, XCircle, BrainCircuit } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { KNOWLEDGE_DB } from '@/lib/game/knowledgeContent';
+import { synth } from '@/lib/audio/synth';
 
 export default function KnowledgeOverlay() {
-  const { isLevelComplete, level, nextLevel } = useMathStore();
+  const { isLevelComplete, level, nextLevel, setIsWarping, setSacrificeSequence } = useMathStore();
   const { startDialogue } = useDialogueStore();
   const [show, setShow] = useState(false);
   const [step, setStep] = useState<'QUIZ' | 'SUCCESS'>('QUIZ');
@@ -98,7 +99,7 @@ export default function KnowledgeOverlay() {
   };
 
   return (
-    <div className="absolute inset-x-0 top-0 bottom-48 z-40 flex items-center justify-center font-mono pointer-events-none">
+    <div className="absolute inset-x-0 top-0 bottom-0 z-40 flex items-start justify-center pt-4 font-mono pointer-events-none">
       <AnimatePresence mode='wait'>
         {step === 'QUIZ' && content.quiz ? (
           <motion.div
@@ -106,7 +107,7 @@ export default function KnowledgeOverlay() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-slate-900/95 border-2 border-yellow-500/50 p-8 max-w-lg w-full shadow-2xl relative overflow-x-hidden overflow-y-auto max-h-[70vh] group pointer-events-auto backdrop-blur-md"
+            className="bg-slate-900/95 border-2 border-yellow-500/50 p-8 max-w-lg w-full shadow-2xl relative overflow-x-hidden overflow-y-auto max-h-[54vh] group pointer-events-auto backdrop-blur-md"
           >
             {/* Tech Corners */}
             <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-yellow-500" />
@@ -201,7 +202,20 @@ export default function KnowledgeOverlay() {
               <button
                 onClick={() => {
                   setShow(false);
-                  nextLevel();
+
+                  if (level === 3) {
+                    // Level 3 Special End: Sacrifice Sequence
+                    setSacrificeSequence(true);
+                  } else {
+                    // Standard Warp Transition
+                    setIsWarping(true);
+                    synth.playTone(100, 'sawtooth', 2, 0.1); // Warp Sound
+
+                    setTimeout(() => {
+                      nextLevel();
+                      setIsWarping(false);
+                    }, 2500);
+                  }
                 }}
                 className="w-full mt-8 bg-green-600/20 hover:bg-green-600/40 text-green-400 font-bold py-3 px-6 flex items-center justify-center gap-2 transition-all border border-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] group uppercase tracking-widest text-sm"
               >

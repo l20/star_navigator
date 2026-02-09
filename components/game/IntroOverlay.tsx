@@ -205,13 +205,14 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-slate-300 text-lg leading-relaxed border-l-2 border-slate-700 pl-4 bg-slate-900/20 py-2" // Tech block style
+            className="text-slate-300 text-base leading-relaxed border-l-2 border-slate-700 pl-4 bg-slate-900/20 py-2" // Tech block style
           >
             {storyMode ? (
               <>
-                <p className="mb-2">公元 2098 年，地球资源枯竭。人类最后的希望——<span className="text-cyan-400 font-bold bg-cyan-950/30 px-1">“方舟号”</span>，在柯伊伯带边缘遭遇引力异常。</p>
-                <p className="mb-2">飞船系统全面离线... 300 年前的领航员们陷入沉睡。</p>
-                <p>作为唯一的远程<span className="text-white font-bold px-1">“适格者”</span>，你将跨越时空，接管控制权。</p>
+                <p className="mb-2">公元 2098 年，<span className="text-cyan-400 font-bold bg-cyan-950/30 px-1">“银河号”</span>在穿越柯伊伯带时遭遇未知<span className="text-red-500 font-bold">黑洞潮汐</span>。</p>
+                <p className="mb-2"><span className="text-red-400 font-bold">[危机]</span>：飞船导航系统崩溃，时空曲率混乱。我们被困在了<span className="text-red-400">奇点引力井</span>中，飞船质量过大，无法直接逃逸。</p>
+                <p className="mb-2"><span className="text-green-400 font-bold">[任务]</span>：作为唯一的远程<span className="text-white font-bold px-1">“领航员”</span>，你需要手动重启<span className="text-amber-400 font-bold">抛物线引擎 (Parabola Engine)</span>。</p>
+                <p>通过精准调整数学参数 (<span className="italic font-bold text-indigo-300">a, h, k</span>) 重建引力波桥梁，带领休眠的船员逃离视界。</p>
 
                 {/* Crew Manifest - Fades in later */}
                 {textStage >= 2 && (
@@ -231,7 +232,7 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
                       <div className="w-8 h-8 relative rounded-full overflow-hidden border border-cyan-500/50">
                         <Image src="/deer.jpeg" alt="Deer" fill className="object-cover" />
                       </div>
-                      <span>智能中枢 - 小鹿 (Deer): <span className="text-green-500 text-xs">运行正常 (Online)</span></span>
+                      <span>人工智能中枢 - 小鹿 (Deer): <span className="text-green-500 text-xs">运行正常 (Online)</span></span>
                     </div>
                     <div className="flex items-center gap-2 text-slate-400 opacity-50">
                       <HelpCircle className="w-4 h-4 text-red-500" />
@@ -247,7 +248,7 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
                         }}
                         className="bg-cyan-950/40 border border-cyan-500/50 text-cyan-400 px-6 py-2 text-xs uppercase tracking-widest hover:bg-cyan-500/20 transition-all animate-pulse"
                       >
-                        [ 初始化连接 / INITIALIZE ]
+                        [ 初始化引力波通信呼叫小鹿 / INITIALIZE ]
                       </button>
                     </div>
                   </motion.div>
@@ -273,13 +274,13 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
             {!isNameSubmitted ? (
               <div className="flex flex-col items-center gap-6" onClick={(e) => e.stopPropagation()}>
                 <div className="text-cyan-500 text-sm tracking-widest uppercase mb-2">
-                  {storyMode ? "请输入您的指挥官代号 (IDENTIFICATION)" : "请输入您的名字"}
+                  {storyMode ? "请输入您的领航员代号 (IDENTIFICATION)" : "请输入您的名字"}
                 </div>
                 <input
                   type="text"
                   value={inputName}
                   onChange={(e) => setInputName(e.target.value)}
-                  placeholder="Commander..."
+                  placeholder="你的ID..."
                   className="bg-slate-900/50 border-b-2 border-cyan-500 text-center text-2xl text-white outline-none py-2 w-64 focus:border-cyan-400 focus:bg-slate-800/50 transition-all font-mono uppercase placeholder-slate-600"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && inputName.trim()) {

@@ -161,7 +161,7 @@ export const KNOWLEDGE_DB: Record<number, KnowledgeEntry> = {
     },
     completionShoutout: {
       photon: "参数确认：a = 10。极其陡峭的孤独曲线。",
-      merchant: "别哭。数学是最美的语言。指挥官，按下执行键吧。",
+      merchant: "别哭。数学是最美的语言。领航员，按下执行键吧。",
       player: "（解析式：y = 10(x-5)² + 3。确认执行。）"
     }
   }

@@ -16,7 +16,7 @@ export const LEVEL_0_SCRIPT: DialogueNode[] = [
   },
   {
     id: 'l0_intro_2',
-    text: "看，老商人的货运路标被抹平了。在 y = 0 的线性虚无中，空间失去了维度。",
+    text: "看，老林的货运路标被抹平了。在 y = 0 的线性虚无中，空间失去了维度。",
     speaker: 'photon',
     emotion: 'sad',
     next: 'l0_merchant_1'

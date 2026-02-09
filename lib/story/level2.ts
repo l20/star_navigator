@@ -23,7 +23,7 @@ export const STORY_LEVEL_2_SCRIPT: DialogueNode[] = [
   },
   {
     id: 's2_captain_2',
-    text: "我不懂什么镜像！指挥官，快接管导航！再这样下去我们要撞上那颗红巨星了！",
+    text: "我不懂什么镜像！领航员，快接管导航！再这样下去我们要撞上那颗红巨星了！",
     speaker: 'captain',
     emotion: 'scared',
     next: 's2_nav_1'
@@ -37,7 +37,7 @@ export const STORY_LEVEL_2_SCRIPT: DialogueNode[] = [
   },
   {
     id: 's2_resume_1',
-    text: "相位修正完毕。记住口诀：左加右减。指挥官，带我们去右边的安全区。",
+    text: "相位修正完毕。记住口诀：左加右减。领航员，带我们去右边的安全区。",
     speaker: 'deer',
     emotion: 'neutral',
     next: 's2_tutorial'

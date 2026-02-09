@@ -3,68 +3,48 @@ import { DialogueNode } from '@/store/useDialogueStore';
 export const STORY_LEVEL_0_SCRIPT: DialogueNode[] = [
   {
     id: 's0_start',
-    text: "喂！那个新来的领航员，听得到吗？系统全红了，快帮我看一眼仪表盘！",
-    speaker: 'captain',
+    text: "警报！引力波雷达红区。检测到未知奇点捕获。老林（林舰长）的生命体征极其微弱，休眠舱正处于临界状态！",
+    speaker: 'deer',
     emotion: 'scared',
     next: 's0_deer_intro'
   },
   {
     id: 's0_deer_intro',
-    text: "检测到驾驶员情绪不稳定。已接管辅助系统。领航员，请看大屏幕，我们需要手动修正星轨参数。",
+    text: "领航员（ID: 9527），现在的你就是这艘船的唯一大脑。推进器线性出力已经失效（y = kx + b），我们正在坠向视界！",
     speaker: 'deer',
     emotion: 'neutral',
-    next: 's0_captain_1'
-  },
-  {
-    id: 's0_captain_1',
-    text: "推进器即使开到最大，读数还在往下掉！我们在坠落！小鹿，计算线性逃逸路径！",
-    speaker: 'captain',
-    emotion: 'scared',
     next: 's0_deer_1'
   },
   {
     id: 's0_deer_1',
-    text: "线性路径（y = kx + b）逃逸率 0%。必须升维。指挥官，进入思维殿堂，我们需要构建“二次动力学模型”。",
+    text: "必须升维！我们需要构建“二次型动力场”来对抗引力。快，进入神经链接，我来教你构建数学模型。",
     speaker: 'deer',
     emotion: 'neutral',
     next: 's0_nav_1'
   },
   {
     id: 's0_nav_1',
-    text: "（收到。正在建立神经链接……思维殿堂启动。）",
+    text: "（收到。正在接入火控系统……思维殿堂启动。）",
     speaker: 'navigator',
     action: 'OPEN_MIND_PALACE', // Triggers the educational overlay
     next: 's0_resume_1'
   },
-  // The game pauses here until Mind Palace is resolved.
-  // When resumed, we jump to next node? Or does the overlay callback handle it?
-  // Let's assume the callback will advance() the dialogue or we manually trigger next.
-  // Actually, 'action' will be handled, and 'next' is 's0_resume_1'.
-  // But we want to PAUSE the dialogue *after* this line is shown, OR show the overlay *over* it.
-  // If we show overlay, we might want to wait for it to close before showing next line.
-  // Strategy: The overlay closing triggers `advance()`.
-
   {
     id: 's0_resume_1',
-    text: "模型构建完毕。反重力场已就绪。指挥官，请注入参数 a = 5。",
+    text: "模型构建完毕。反重力场已就绪。领航员，请尝试调整开口率 a，制造向上的升力！小心，a 过大会导致过载。",
     speaker: 'deer',
     emotion: 'happy',
-    next: 's0_captain_3'
+    next: 's0_system_alert'
   },
   {
-    id: 's0_captain_3',
-    text: "虽然不知道你们在搞什么鬼，但我也感觉到了……船身变轻了？",
-    speaker: 'captain',
-    emotion: 'surprised',
+    id: 's0_system_alert',
+    text: "警告：休眠舱能量下降。请尽快稳定船体姿态，否则林舰长将无法苏醒。",
+    speaker: 'system',
     next: 's0_tutorial'
   },
   {
     id: 's0_tutorial',
-    text: "（任务目标：将抛物线开口向上并收窄。设置 a = 0.005）", // Note: existing game logic uses small floats for a, despite script saying 5. We need to align mental model or scale.
-    // Script said "a=5", but game engine uses 0.005.
-    // Let's adjust text to be realistic to game or adjust game scale. 
-    // Game scale 0.005 is "strong" enough visually. 
-    // Let's keep game logic for now and say "Set a to match the guide".
+    text: "（任务目标：调整参数 a，使抛物线支撑起下坠的船体。建议尝试 a = 0.005）",
     speaker: 'system',
     action: 'ENABLE_CONTROLS',
     next: 's0_end'

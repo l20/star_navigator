@@ -11,7 +11,7 @@ export default function GameCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Math Store Access
-  const { a, h, k, targetA, completeLevel, isLevelComplete } = useMathStore();
+  const { a, h, k, targetA, completeLevel, isLevelComplete, nextLevel, setIsWarping, setSacrificeSequence } = useMathStore();
 
   // Physics Refs
   const engineRef = useRef<Matter.Engine | null>(null);
@@ -106,6 +106,9 @@ export default function GameCanvas() {
           completeLevel();
           synth.playTone(600, 'sine', 0.2, 0.2); // Success Sound
           synth.playTone(800, 'sine', 0.4, 0.2);
+
+          // Auto-advance logic moved to KnowledgeOverlay
+          // This allows users to read the quiz before warping.
         }
 
         // B. Physical Celebration (Run to the right)

@@ -42,9 +42,9 @@ const TypingEffect = ({ text, speaker }: { text: string; speaker: Speaker }) => 
 
 const getDisplayName = (speaker: Speaker, playerName?: string) => {
   switch (speaker) {
-    case 'merchant': return '老商人';
+    case 'merchant': return '老林';
     case 'captain': return '老林 (Captain Lin)';
-    case 'photon': return '光子 (Photon)';
+    case 'photon': return '小鹿 (Photon)';
     case 'deer': return '小鹿 (Deer)';
     case 'player': return `${playerName || '调律师'} (Tuner)`;
     case 'navigator': return `${playerName || '领航员'} (Navigator)`;
@@ -139,7 +139,7 @@ export default function DialogueOverlay() {
 
             <div className="text-lg md:text-xl font-medium leading-relaxed text-white/90 min-h-[3.5rem] font-sans">
               <TypingEffect
-                text={currentNode.text.replace(/{player}/g, useMathStore.getState().userName || '指挥官')}
+                text={currentNode.text.replace(/{player}/g, useMathStore.getState().userName || '领航员')}
                 speaker={currentNode.speaker}
               />
             </div>

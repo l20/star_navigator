@@ -9,7 +9,10 @@ import KnowledgeOverlay from '@/components/game/KnowledgeOverlay';
 import MindPalaceOverlay from '@/components/game/MindPalaceOverlay';
 import IntroOverlay from '@/components/game/IntroOverlay';
 import SystemBootOverlay from '@/components/game/SystemBootOverlay';
-import DataLogOverlay from '@/components/game/DataLogOverlay'; // Missed Import
+import StarMapOverlay from '@/components/game/StarMapOverlay'; // Replaces DataLogOverlay
+import WarpTransition from '@/components/game/WarpTransition'; // New Warp Animation
+import EndingOverlay from '@/components/game/EndingOverlay'; // New Ending Screen
+import SacrificeSequence from '@/components/game/SacrificeSequence'; // New Tragic Event
 import CognitiveTracker from '@/components/game/CognitiveTracker'; // New ITS Component
 import BackgroundMusic from '@/components/game/BackgroundMusic';
 import ShipHUD from '@/components/game/ShipHUD';
@@ -30,7 +33,12 @@ export default function StoryModePage() {
     setIsPlaying,
     resetLevel,
     isSystemBootComplete,
-    completeSystemBoot
+    completeSystemBoot,
+    isWarping, // Get Warp State
+    isGameComplete,
+    isSacrificeSequence,
+    setSacrificeSequence,
+    nextLevel
   } = useMathStore();
 
   const [introFinished, setIntroFinished] = useState(false);
@@ -96,8 +104,18 @@ export default function StoryModePage() {
               <DialogueOverlay />
               <MindPalaceOverlay />
               <KnowledgeOverlay />
-              <DataLogOverlay /> {/* Render Logs */}
+              <StarMapOverlay /> {/* Star Map System */}
               <CognitiveTracker /> {/* ITS Logic */}
+              {isWarping && <WarpTransition />} {/* Warp Effect */}
+              {isSacrificeSequence && (
+                <SacrificeSequence
+                  onComplete={() => {
+                    setSacrificeSequence(false);
+                    nextLevel(); // Triggers Ending
+                  }}
+                />
+              )}
+              {isGameComplete && <EndingOverlay />} {/* Ending Screen */}
             </>
           )}
 

@@ -38,6 +38,9 @@ interface MathState {
 
   isMindPalaceOpen: boolean; // New: For Story Mode
   storyMode: boolean; // New: To distinguish between Classic and Story
+  isWarping: boolean; // New: Visual transition state
+  isSacrificeSequence: boolean; // New: Tragic event state
+  isGameComplete: boolean; // New: End State
 
   // ITS State
   cognitiveState: {
@@ -57,6 +60,8 @@ interface MathState {
   closeDataLog: () => void; // New Action
   setMindPalaceOpen: (open: boolean) => void; // New
   setStoryMode: (enabled: boolean) => void; // New
+  setIsWarping: (warping: boolean) => void; // New transition action
+  setSacrificeSequence: (active: boolean) => void; // New
   resetLevel: () => void;
   completeLevel: () => void;
   incrementAttempts: () => void;
@@ -94,6 +99,9 @@ export const useMathStore = create<MathState>()(
       isDataLogOpen: false,
       isMindPalaceOpen: false,
       storyMode: false,
+      isWarping: false, // New Warp State
+      isSacrificeSequence: false,
+      isGameComplete: false, // Initial state
 
       isSystemBootComplete: false, // Initial state
 
@@ -114,6 +122,9 @@ export const useMathStore = create<MathState>()(
       closeDataLog: () => set({ isDataLogOpen: false }),
       setMindPalaceOpen: (open) => set({ isMindPalaceOpen: open }),
       setStoryMode: (enabled) => set({ storyMode: enabled }),
+      setIsWarping: (warping) => set({ isWarping: warping }), // New Action
+      setSacrificeSequence: (active) => set({ isSacrificeSequence: active }), // New Action
+
 
       resetLevel: () => {
         const currentLevelIdx = get().level;
@@ -168,8 +179,8 @@ export const useMathStore = create<MathState>()(
         const nextLevelIdx = currentLevel + 1;
 
         if (nextLevelIdx >= LEVEL_CONFIGS.length) {
-          // alert("Demo Completed! Thanks for playing."); // Remove alert for smoother UX
-          set({ level: 0, ...LEVEL_CONFIGS[0], targetH: undefined, targetK: undefined, isLevelComplete: false, attempts: 0 });
+          // End of Game Trigger
+          set({ isGameComplete: true });
           return;
         }
 

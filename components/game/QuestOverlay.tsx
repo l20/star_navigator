@@ -13,11 +13,11 @@ export default function QuestOverlay() {
   // Determine Quest Text based on Level
   const getQuestText = () => {
     switch (level) {
-      case 0: return "第一章：零点觉醒 (Bend Space)";
-      case 1: return "第二章：重力电梯 (Restore Bridge)";
-      case 2: return "第三章：镜像漂移 (Correct Drift)";
-      case 3: return "第四章：蓝图重构 (Final Alignment)";
-      default: return "未知任务 (Unknown)";
+      case 0: return "第一章：起源站 (The Origin)";
+      case 1: return "第二章：重力井 (Gravity Well)";
+      case 2: return "第三章：漂流带 (The Drift)";
+      case 3: return "第四章：奇点 (Singularity)";
+      default: return "未知扇区 (Unknown Sector)";
     }
   };
 

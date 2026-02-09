@@ -56,7 +56,7 @@ export const STORY_LEVEL_3_SCRIPT: DialogueNode[] = [
   },
   {
     id: 's3_captain_4',
-    text: "远程链路坏了（说谎）。必须有人留下。指挥官，听好了。这是最后一道题。",
+    text: "远程链路坏了（说谎）。必须有人留下。领航员，听好了。这是最后一道题。",
     speaker: 'captain',
     emotion: 'neutral',
     next: 's3_nav_1'
@@ -77,7 +77,7 @@ export const STORY_LEVEL_3_SCRIPT: DialogueNode[] = [
   },
   {
     id: 's3_captain_5',
-    text: "别哭。数学是最美的语言。指挥官，按下执行键吧。带我们回家。",
+    text: "别哭。数学是最美的语言。领航员，按下执行键吧。带我们回家。",
     speaker: 'captain',
     emotion: 'happy',
     next: 's3_action'

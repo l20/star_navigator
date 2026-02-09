@@ -18,7 +18,7 @@ export const LEVEL_1_SCRIPT: DialogueNode[] = [
   },
   {
     id: 'intro_3',
-    text: "我是光子 (Photon)，这个扇区的几何守护者。你看到了吗？所有的“曲率”都被抹平了！",
+    text: "我是小鹿 (Photon)，这个扇区的几何守护者。你看到了吗？所有的“曲率”都被抹平了！",
     speaker: 'photon',
     emotion: 'worry',
     next: 'intro_4',

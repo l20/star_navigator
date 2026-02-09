@@ -6,7 +6,7 @@ import { useDialogueStore } from '@/store/useDialogueStore';
 
 // Hint Definitions (Could move to a separate file)
 const HINTS = {
-  HESITATION_LEVEL_0: "指挥官，黑洞在下方，我们需要一个向上的‘托举力’。想想 a 的符号应该是什么？",
+  HESITATION_LEVEL_0: "领航员，黑洞在下方，我们需要一个向上的‘托举力’。想想 a 的符号应该是什么？",
   HESITATION_LEVEL_1_K: "警告！当前轨道高度不足。我们将直接撞击前方残骸带。请提升 k 值，让抛物线‘抬’起来。",
   HESITATION_LEVEL_2_H: "目标锁定中... 还在犹豫吗？记住‘左加右减’，括号里的世界是反的。",
 
@@ -70,7 +70,7 @@ export default function CognitiveTracker() {
       case 0: hint = HINTS.HESITATION_LEVEL_0; break;
       case 1: hint = HINTS.HESITATION_LEVEL_1_K; break;
       case 2: hint = HINTS.HESITATION_LEVEL_2_H; break;
-      case 3: hint = "指挥官，深呼吸。先定位置(h,k)，再定形状(a)。"; break;
+      case 3: hint = "领航员，深呼吸。先定位置(h,k)，再定形状(a)。"; break;
       default: hint = "需要帮忙吗？试着调整一下滑块。"; break;
     }
     triggerHint(hint);
