@@ -78,28 +78,23 @@ export default function GameCanvas() {
       // 1. Math Win Logic (Independent of Physics)
       // Relaxed threshold to 0.001 to ensure if MathOverlay shines, we trigger
       let isMathCorrect = true;
+      const state = useMathStore.getState();
 
       // Check A
-      if (targetA !== undefined && Math.abs(a - targetA) > 0.001) isMathCorrect = false;
+      if (state.targetA !== undefined && Math.abs(state.a - state.targetA) > 0.001) isMathCorrect = false;
 
       // Check H (Pixel tolerance relaxed to 30 to match visual feedback)
-      if (useMathStore.getState().targetH !== undefined) {
-        const th = useMathStore.getState().targetH!;
-        if (Math.abs(h - th) > 30) isMathCorrect = false;
+      if (state.targetH !== undefined) {
+        if (Math.abs(state.h - state.targetH) > 30) isMathCorrect = false;
       }
 
       // Check K (Pixel tolerance relaxed to 30)
-      if (useMathStore.getState().targetK !== undefined) {
-        const tk = useMathStore.getState().targetK!;
-        if (Math.abs(k - tk) > 30) isMathCorrect = false;
+      if (state.targetK !== undefined) {
+        if (Math.abs(state.k - state.targetK) > 30) isMathCorrect = false;
       }
 
       // [STORY MODE OVERRIDE] Level 3 Sacrifice Logic
-      if (useMathStore.getState().storyMode && useMathStore.getState().level === 3) {
-        // Target is a=10 (Scripted)
-        if (Math.abs(a - 10) < 0.5) isMathCorrect = true;
-        else isMathCorrect = false;
-      }
+
 
       // Debug log every second to confirm loop is alive
       if (Math.random() < 0.05) console.log("Loop heartbeat. Correct:", isMathCorrect, "A:", a);

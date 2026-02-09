@@ -9,6 +9,7 @@ import KnowledgeOverlay from '@/components/game/KnowledgeOverlay';
 import MindPalaceOverlay from '@/components/game/MindPalaceOverlay';
 import IntroOverlay from '@/components/game/IntroOverlay';
 import SystemBootOverlay from '@/components/game/SystemBootOverlay';
+import DataLogOverlay from '@/components/game/DataLogOverlay'; // Missed Import
 import CognitiveTracker from '@/components/game/CognitiveTracker'; // New ITS Component
 import BackgroundMusic from '@/components/game/BackgroundMusic';
 import ShipHUD from '@/components/game/ShipHUD';
@@ -95,6 +96,7 @@ export default function StoryModePage() {
               <DialogueOverlay />
               <MindPalaceOverlay />
               <KnowledgeOverlay />
+              <DataLogOverlay /> {/* Render Logs */}
               <CognitiveTracker /> {/* ITS Logic */}
             </>
           )}

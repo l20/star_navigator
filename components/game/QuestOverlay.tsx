@@ -39,6 +39,11 @@ export default function QuestOverlay() {
             <h2 className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Current Objective</h2>
             <div className="text-sm font-medium text-slate-200">
               {getQuestText()}
+              {process.env.NODE_ENV === 'development' && (
+                <span className="ml-2 text-xs text-yellow-500 font-mono bg-yellow-900/30 px-1 border border-yellow-700/50">
+                  [DEV: L{level}]
+                </span>
+              )}
             </div>
           </div>
 

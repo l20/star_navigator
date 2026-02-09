@@ -14,7 +14,7 @@ const BOOT_LINES = [
   "📅 纪元：2026.05.21",
   "📍 坐标：柯伊伯带边缘",
   "🚀 载具：方舟号 (Class-V)",
-  "👤 身份：见习调试员 (ID: 9527)",
+  "👤 身份：见习领航员 (ID: 9527)",
   "----------------------------------------",
   "...",
   "警告：检测到引力异常。",
@@ -41,7 +41,7 @@ export default function SystemBootOverlay({ onComplete }: { onComplete: () => vo
       let lineText = BOOT_LINES[currentIndex];
       // Inject User Name dynamically
       if (lineText.includes("ID: 9527")) {
-        lineText = lineText.replace("见习调试员", userName || "见习调试员");
+        lineText = lineText.replace("见习领航员", userName || "见习领航员");
       }
 
       setLines(prev => [...prev, lineText]);

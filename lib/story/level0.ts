@@ -3,14 +3,14 @@ import { DialogueNode } from '@/store/useDialogueStore';
 export const STORY_LEVEL_0_SCRIPT: DialogueNode[] = [
   {
     id: 's0_start',
-    text: "喂！那个新来的调试员，听得到吗？系统全红了，快帮我看一眼仪表盘！",
+    text: "喂！那个新来的领航员，听得到吗？系统全红了，快帮我看一眼仪表盘！",
     speaker: 'captain',
     emotion: 'scared',
     next: 's0_deer_intro'
   },
   {
     id: 's0_deer_intro',
-    text: "检测到驾驶员情绪不稳定。已接管辅助系统。调试员，请看大屏幕，我们需要手动修正星轨参数。",
+    text: "检测到驾驶员情绪不稳定。已接管辅助系统。领航员，请看大屏幕，我们需要手动修正星轨参数。",
     speaker: 'deer',
     emotion: 'neutral',
     next: 's0_captain_1'
