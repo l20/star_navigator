@@ -98,7 +98,7 @@ export default function KnowledgeOverlay() {
   };
 
   return (
-    <div className="absolute inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md font-mono">
+    <div className="absolute inset-x-0 top-0 bottom-48 z-40 flex items-center justify-center font-mono pointer-events-none">
       <AnimatePresence mode='wait'>
         {step === 'QUIZ' && content.quiz ? (
           <motion.div
@@ -106,7 +106,7 @@ export default function KnowledgeOverlay() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-slate-900/90 border-2 border-yellow-500/50 p-8 max-w-lg w-full shadow-2xl relative overflow-x-hidden overflow-y-auto max-h-[85vh] group"
+            className="bg-slate-900/95 border-2 border-yellow-500/50 p-8 max-w-lg w-full shadow-2xl relative overflow-x-hidden overflow-y-auto max-h-[70vh] group pointer-events-auto backdrop-blur-md"
           >
             {/* Tech Corners */}
             <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-yellow-500" />
@@ -172,7 +172,7 @@ export default function KnowledgeOverlay() {
             key="success"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-slate-900/95 border-2 border-green-500/50 p-8 max-w-md shadow-2xl relative overflow-x-hidden overflow-y-auto max-h-[85vh]"
+            className="bg-slate-900/95 border-2 border-green-500/50 p-8 max-w-md shadow-2xl relative overflow-x-hidden overflow-y-auto max-h-[70vh] pointer-events-auto backdrop-blur-md"
           >
             {/* Tech Corners */}
             <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-green-500" />
