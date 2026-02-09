@@ -103,6 +103,20 @@ export default function MathOverlay() {
 
   return (
     <div className="absolute inset-0 pointer-events-none">
+      {/* Audio Toggle - Fixed Top-Right */}
+      <div className="fixed top-4 right-4 z-[9999] pointer-events-auto">
+        <button
+          onClick={() => useMathStore.getState().toggleMusic()}
+          className="bg-slate-900/80 border border-slate-600 text-slate-400 hover:text-cyan-400 hover:border-cyan-500 p-3 rounded-full transition-all duration-300 backdrop-blur-md shadow-lg group"
+          title={useMathStore.getState().isMusicMuted ? "Unmute BGM" : "Mute BGM"}
+        >
+          {useMathStore.getState().isMusicMuted ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:scale-110 transition-transform"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><line x1="23" x2="17" y1="9" y2="15" /><line x1="17" x2="23" y1="9" y2="15" /></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:scale-110 transition-transform"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M15.54 8.46a5 5 0 0 1 0 7.07" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14" /></svg>
+          )}
+        </button>
+      </div>
       <svg className="w-full h-full overflow-visible">
         {/* Target Ghost Curve (Dashed) */}
         {pathTarget && (
@@ -140,17 +154,7 @@ export default function MathOverlay() {
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-slate-900 px-3 text-[10px] text-slate-500 uppercase tracking-widest border border-slate-700 whitespace-nowrap flex items-center gap-4 pointer-events-auto">
             <span>星舰飞控系统 (FLIGHT CONTROL)</span>
             {/* Audio Toggle */}
-            <button
-              onClick={() => useMathStore.getState().toggleMusic()}
-              className="hover:text-cyan-400 transition-colors"
-              title={useMathStore.getState().isMusicMuted ? "Unmute BGM" : "Mute BGM"}
-            >
-              {useMathStore.getState().isMusicMuted ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><line x1="23" x2="17" y1="9" y2="15" /><line x1="17" x2="23" y1="9" y2="15" /></svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M15.54 8.46a5 5 0 0 1 0 7.07" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14" /></svg>
-              )}
-            </button>
+            {/* Audio Toggle removed from here */}
           </div>
 
           {/* The Equation Display */}
